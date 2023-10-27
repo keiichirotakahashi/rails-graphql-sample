@@ -1,0 +1,28 @@
+version: "3"
+services:
+  db:
+    image: postgres:15.4-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    restart: always
+  api:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle && bundle exec rails s -p 4000 -b '0.0.0.0'"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      TZ: Japan
+    volumes:
+      - .:/rails-graphql-sample
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+volumes:
+  postgres_volume:
