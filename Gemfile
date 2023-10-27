@@ -8,6 +8,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-jwt'
 gem 'dotenv-rails'
+gem 'graphql'
 gem 'pg'
 gem 'puma'
 gem 'rack-cors'
@@ -20,4 +21,6 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'graphiql-rails'
+  gem 'sass-rails'
 end
